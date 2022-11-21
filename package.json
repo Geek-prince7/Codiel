@@ -13,6 +13,11 @@
   "author": "prince dubey",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.7.2"
   }
 }
