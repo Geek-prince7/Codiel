@@ -1,3 +1,5 @@
+const userCollection=require('../models/user')
+
 module.exports.user=function(req,resp){
     //we have used cookie parser in index.js so we can see cookie
     console.log(req.cookies)
@@ -21,5 +23,26 @@ module.exports.signup=function(req,resp){
 
 //signup response
 module.exports.createUser=function(req,resp){
-    
+    if(req.body.password!=req.body.cnf_password)
+    {
+        return resp.redirect('back')
+    }
+    userCollection.create(req.body,function(error,data){
+        if(error)
+        {
+            console.log("----------------------------- error in saving data --------------------------------")
+            return resp.redirect('back')
+        }
+        console.log(data)
+        return resp.redirect('/users/sign-in')
+
+    })
+
+}
+
+
+//login request
+module.exports.login=function(req,resp){
+    resp.redirect('/');
+
 }
