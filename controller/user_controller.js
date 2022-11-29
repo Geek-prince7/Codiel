@@ -4,10 +4,10 @@ module.exports.user=function(req,resp){
     //we have used cookie parser in index.js so we can see cookie
     console.log(req.cookies)
     //we can change cookie val also
-    resp.cookie('name','abc')
+    // resp.cookie('name','abc')
     //add new cookie
-    resp.cookie('new cookie','new val')
-    return resp.end("<h1>user is rendered</h1>")
+    // resp.cookie('new cookie','new val')
+    return resp.render('profile',{title:'Codiel | profile'})
 }
 
 //render sign in page
@@ -45,4 +45,21 @@ module.exports.createUser=function(req,resp){
 module.exports.login=function(req,resp){
     resp.redirect('/');
 
+}
+
+module.exports.destroySession=function(req,resp){
+    /*
+    req.session.destroy(function(error){
+        if(error)
+        {
+            console.log("error in logging out ---------")
+        }
+
+    })
+    */
+   //or
+   req.logout(function(error){
+    console.log("Error in logging out");
+   });
+    return resp.redirect('/users/sign-in')
 }

@@ -1,0 +1,70 @@
+$background_color:whitesmoke;
+$Input_color:white;
+$Text_color:black;
+.form-div{
+    width: 30%;
+    background-color:$background_color;   
+    // background-color: rgb(158, 190, 203);
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 300px;
+    border-radius: 20px;
+    h2{
+        margin: auto;
+        color: black;
+        // margin-top: 20px;
+        // border: 1px solid red;
+        padding-top: 20px;
+        width: fit-content;
+        font-size: larger;
+        font-weight: 700;
+        
+    
+    }
+    form{
+        width: 100%;
+        margin-top: 20px;
+        
+        // border: 1px solid red;
+        input{
+            
+            width: 50%;
+            margin-left: 25%;
+            height: 11%;
+            border: none;
+            color: $Text_color;
+            background-color: $Input_color;
+            border-bottom: 1px solid rgb(225, 224, 224);
+            border-radius: 10px;
+            padding: 5px;    
+        }
+        input:focus{
+            // border: none;
+            border-top: none;
+            outline: none;
+            // background-color: red;
+        }
+        button{
+            margin-top: 20px;
+            width: 50%;
+            // background-color:black;
+            background-color: rgb(0, 149, 246);
+            color: white;
+            margin-left: 25% ;
+            padding: 3px;
+            border-radius: 10px;
+            border: none;
+
+            
+
+        }
+        
+    }
+    h6{
+        width: fit-content;
+        margin: auto;
+    }
+}
+
+

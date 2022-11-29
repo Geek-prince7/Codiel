@@ -1,0 +1,53 @@
+.header-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  border-bottom: 2px solid #ccc4c4;
+  align-items: center;
+  font-weight: 500;
+  font-size: larger;
+  color: #262626; }
+
+.header-div div {
+  margin-left: 1.6%;
+  font-size: x-large;
+  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace; }
+
+ul {
+  width: 45%;
+  height: 100%;
+  list-style: none; }
+
+.list-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+a {
+  text-decoration: none;
+  color: #262626; }
+
+a:hover {
+  color: grey; }
+
+.search-bar {
+  background-color: white;
+  height: 100%; }
+  .search-bar i {
+    height: 100%;
+    background-color: white;
+    margin: 0px;
+    margin-right: 3px; }
+  .search-bar input {
+    height: 100%;
+    border: none;
+    background-color: white;
+    margin: 0px 0px;
+    color: grey; }
+  .search-bar input:hover {
+    background-color: white;
+    border-bottom: 1px solid black; }
+  .search-bar input:focus {
+    outline: none; }

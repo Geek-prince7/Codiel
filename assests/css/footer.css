@@ -1,0 +1,16 @@
+.footer-main {
+  background-color: whitesmoke;
+  padding: 5px;
+  height: 250px;
+  overflow-y: hidden;
+  outline: auto; }
+  .footer-main h5 {
+    width: fit-content; }
+  .footer-main ul {
+    width: fit-content;
+    width: 90%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none; }

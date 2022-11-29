@@ -1,0 +1,24 @@
+$background_color:whitesmoke;
+.footer-main{
+    background-color:$background_color ;
+    // background-color: #A8A9AD;
+    padding: 5px;
+    height: 250px;
+    overflow-y: hidden;
+    outline: auto;
+    
+    h5{
+        width: fit-content;
+        
+    }
+    ul{
+        width: fit-content;
+        width: 90%;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        list-style: none;
+        
+    }
+}

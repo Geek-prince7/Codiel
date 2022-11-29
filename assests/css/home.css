@@ -1,3 +1,6 @@
-.heading-3{
-    background-color: black;
-}
+.heading-3 {
+  background-color: black; }
+
+#new-post-form textarea {
+  border: none;
+  background-color: #f3e9e9; }

@@ -6,10 +6,10 @@ const passport=require('passport')
 
 console.log("user controller")
 
-router.get('/profile',passport.checkAuthentication,userController.user);
+router.get('/profile',passport.checkAuth,userController.user);
 
-router.get('/sign-in',userController.signin);
-router.get('/sign-up',userController.signup);
+router.get('/sign-in',passport.disableLogin,userController.signin);
+router.get('/sign-up',passport.disableLogin,userController.signup);
 
 //form signup 
 router.post('/create',userController.createUser)
@@ -18,7 +18,9 @@ router.post('/create',userController.createUser)
 // use passport as middleware to authenticate
 router.post('/login',passport.authenticate(
     'local',
-    {failureRedirect:'/users/sign-in'},
+    {failureRedirect:'/users/sign-in'}
 ),userController.login)
+
+router.get('/sign-out',userController.destroySession)
 
 module.exports=router

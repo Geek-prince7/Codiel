@@ -1,0 +1,43 @@
+.form-div {
+  width: 30%;
+  background-color: whitesmoke;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 300px;
+  border-radius: 20px; }
+  .form-div h2 {
+    margin: auto;
+    color: black;
+    padding-top: 20px;
+    width: fit-content;
+    font-size: larger;
+    font-weight: 700; }
+  .form-div form {
+    width: 100%;
+    margin-top: 20px; }
+    .form-div form input {
+      width: 50%;
+      margin-left: 25%;
+      height: 11%;
+      border: none;
+      color: black;
+      background-color: white;
+      border-bottom: 1px solid #e1e0e0;
+      border-radius: 10px;
+      padding: 5px; }
+    .form-div form input:focus {
+      border-top: none;
+      outline: none; }
+    .form-div form button {
+      margin-top: 20px;
+      width: 50%;
+      background-color: #0095f6;
+      color: white;
+      margin-left: 25%;
+      padding: 3px;
+      border-radius: 10px;
+      border: none; }
+  .form-div h6 {
+    width: fit-content;
+    margin: auto; }

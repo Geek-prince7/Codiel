@@ -1,62 +1,64 @@
 const passport=require('passport')
-const LocalStrategy=require('passport-local').Strategy;
+const Localstartegy=require('passport-local').Strategy;
+
 const userCollection=require('../models/user')
 
-//  authentication using passport
-passport.use(new LocalStrategy({
-    usernameField:'email' //email in db is defined and we need to check on email
+
+passport.use(new Localstartegy({
+    usernameField:'email'
+
 },function(email,password,done){
     userCollection.findOne({email:email},function(error,user){
-        if(error){console.log('error in finding user ---> passport');return done(error);}
-        // if user doesnt exist or password mistamatch
-        if(!user || user.password!=password)
-        {
-            console.log("invalid username or password");
-            return done(null,false);  //done(error,Authentication)
+        if(error){console.log("error in fetching recoed  ",error);return done(error);}
+        if(!user || user.password!=password){
+            return done(null,false);
         }
         return done(null,user);
     })
 
-}
-))
+}))
 
-
-//serialize the user(encrypt) -> decide which key to be in cookie
+//serialize
 passport.serializeUser(function(user,done){
-    // done(error,key which is being sent to cookie)
-    done(null,user.id);  //id from db is being send as cookie in encrpted form
-
+    done(null,user._id);
 })
 
-//deserialize the user(decrypt) from the key in cookies
+//deserialize
 passport.deserializeUser(function(id,done){
     userCollection.findById(id,function(error,user){
-        if(error){console.log("error in finding iser --> de serialize");return done(error);}
-        
+        if(error){
+            return done(error);
+        }
         return done(null,user);
-        
     })
 })
 
-
-//check if user is authenticated or not
-passport.checkAuthentication=function(req,resp,next){
+// acts as middleware everytime a request comes it check if auth required if required then if authenticated then next otherwise go to sign in page
+passport.checkAuth=function(req,resp,next){
     if(req.isAuthenticated())
     {
         return next();
     }
-    //else
-    resp.redirect('/users/sign-in');
+    return resp.redirect('/users/sign-in')
 }
-
-passport.setAuthenticatedUser=function(req,resp,next){
-    if(req.isAuthenticated())
-    {
-        console.log('----------------start----------- \n',req.user,'\n -----------------------end------------')
+// passing user(name,email,id,pwd) to locals so that views can access it
+passport.setAuth=function(req,resp,next){
+    console.log("request users----------------------------------------->")
+    console.log(req.user)
+    console.log(req.isAuthenticated())
+    if(req.isAuthenticated()){
         resp.locals.user=req.user
-        
     }
     next();
+}
+
+passport.disableLogin=function(req,resp,next){
+    if(req.isAuthenticated())
+    {
+        return resp.redirect('/users/profile');
+    }
+    return next();
+
 }
 
 module.exports=passport
