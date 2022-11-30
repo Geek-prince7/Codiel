@@ -8,6 +8,7 @@ const session=require('express-session')
 const passport=require('passport')
 const passportLocal=require('./config/passport_local_startegy');
 const  userCollection  = require('./models/user');
+// const postsCollection=require('./models/posts')
 // const MongoStore=require('connect-mongodb-session')(session)
 const MongoStore=require('connect-mongo')
 const userController=require('./controller/user_controller')

@@ -1,14 +1,120 @@
-.heading-3{
-    background-color: black;
-}
-#new-post-form{
-    textarea{
-        border: none;
-        // border-bottom: 1px solid black;
-        background-color: rgb(243, 233, 233);
+$color:rgb(19, 16, 16);
+.main-home
+{
+    display: flex;
+    background-color: white;
+    color: $color;
+    //first section
+    #feed-posts{
+        width:75%;
+        padding: 10px;
+        .form{
+            textarea{
+                border:none;
+                background-color: whitesmoke;
+            }
+            textarea:focus{
+                outline: none;
+                
+            }
+        }
+
+        .view-posts
+        {
+            
+            .post-container{
+                border: 1px solid black;
+                margin: 5px;
+                .post-header{
+                    background-color: whitesmoke;
+                    padding: 3px;
+                    line-height: 0;
+                    border-bottom: 1px solid black;
+                    h3{
+                        a{
+                            color: slateblue;
+                        }
+                        a:hover{
+                            color: grey;
+                        }
+                    }
+                    p{
+                        font-size: x-small;
+                        font-weight: 100;
+                        color: rgb(44, 41, 41);
+                    }
+
+                }
+                .post-content{
+                    background-color: bisque;
+                    padding: 10px;
+                    font-family: Georgia, 'Times New Roman', Times, serif;
+
+                }
+                .comment-container{
+                    // border: 1px solid black;
+                    padding: 5px;
+                    form{
+                        input{
+                            background: white;
+                            border: none;
+                            border-bottom:1px solid black ;
+                        }
+                        input:focus{
+                            outline: none;
+                        }
+                    }
+                    .existing-comment{
+                        font-family:cursive;
+                        font-weight: 300;
+                        font-size: small;
+                        color: rgb(52, 50, 50);
+
+                        a{
+                            font-size: x-small;
+                        }
+                        
+                    }
+                }
+
+            }
+        }
+       
+        h2{
+            text-align: center;
+            background-color: black;
+            color: whitesmoke;
+            box-shadow: inset;
+        }
+    }
+    
+    
+
+
+    //common in both 
+    a{
+        color: red;
     }
     button{
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 5px;
+    }
 
+
+
+
+
+
+
+
+    // second section
+
+    #user-friends{
+        width:25%;
+        padding: 10px;
+        border-left: 1px solid black;
     }
 
 }

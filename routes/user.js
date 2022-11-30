@@ -6,7 +6,10 @@ const passport=require('passport')
 
 console.log("user controller")
 
-router.get('/profile',passport.checkAuth,userController.user);
+router.get('/profile/:id',passport.checkAuth,userController.user);
+
+//update user info name email
+router.post('/update/:id',passport.checkAuth,userController.update)
 
 router.get('/sign-in',passport.disableLogin,userController.signin);
 router.get('/sign-up',passport.disableLogin,userController.signup);
@@ -21,6 +24,12 @@ router.post('/login',passport.authenticate(
     {failureRedirect:'/users/sign-in'}
 ),userController.login)
 
-router.get('/sign-out',userController.destroySession)
+router.get('/sign-out',userController.destroySession);
+
+
+
+
+
+
 
 module.exports=router

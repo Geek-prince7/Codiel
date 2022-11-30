@@ -1,16 +1,26 @@
-        <link rel="stylesheet" href="/css/home.css">
-        
-        <div>
-        <h3 class="heading-3">
-            hi this is home page!
-        </h3>
-        <section id="feed-posts">
-            <h3>Posts</h3>
-            <form id="new-post-form" class="form" action="" method="post">
-                <textarea name="content" placeholder="Write your post..." rows="5" cols="30" required></textarea><br>
-                <button type="submit">Post</button>
+<link rel="stylesheet" href="/css/home.css">
 
-            </form>
-        </section>
+<div class="main-home">
+    <section id="feed-posts">
+        <h2>Posts</h2>
+        <form id="new-post-form" class="form" action="/posts/new-post" method="post">
+            <textarea name="content" placeholder="Write your post..." rows="5" cols="30" required></textarea><br>
+            <button type="submit">Post</button>
+
+        </form>
+    
+        <div class="view-posts">
+            <div >
+                
+                <% for(let post of posts){ %>
+                    <%- include('_posts',{post:post}) -%>
+                <% } %>
+            </div>
         </div>
+    </section>
+    <section id="user-friends">
+        <%- include('_userLists') -%>
+
+    </section>
+</div>
        

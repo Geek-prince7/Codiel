@@ -7,7 +7,28 @@ module.exports.user=function(req,resp){
     // resp.cookie('name','abc')
     //add new cookie
     // resp.cookie('new cookie','new val')
-    return resp.render('profile',{title:'Codiel | profile'})
+    userCollection.findById(req.params.id,(error,user)=>{
+        return resp.render('profile',{title:'Codiel | profile',profile_user:user})
+
+    })
+    
+}
+
+
+//update user's info
+module.exports.update=(req,resp)=>{
+    if(req.user.id==req.params.id)
+    {
+        userCollection.findByIdAndUpdate(req.params.id,req.body,(error,user)=>{
+            if(error){return;}
+            return resp.redirect('back')
+
+        })
+    }
+    else{
+        return resp.status(401).send('unauthorized')
+    }
+
 }
 
 //render sign in page
@@ -63,3 +84,4 @@ module.exports.destroySession=function(req,resp){
    });
     return resp.redirect('/users/sign-in')
 }
+
