@@ -64,6 +64,7 @@ module.exports.createUser=function(req,resp){
 
 //login request
 module.exports.login=function(req,resp){
+    req.flash('success','successfully logged in ')
     resp.redirect('/');
 
 }
@@ -82,6 +83,7 @@ module.exports.destroySession=function(req,resp){
    req.logout(function(error){
     console.log("Error in logging out");
    });
+   req.flash('success','successfully logged out ')
     return resp.redirect('/users/sign-in')
 }
 

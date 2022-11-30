@@ -14,6 +14,8 @@ const MongoStore=require('connect-mongo')
 const userController=require('./controller/user_controller')
 // const MongoStore=require('connect-mongo')
 const sassMiddleware=require('node-sass-middleware')
+const flash=require('connect-flash')
+const customMiddleware_flash=require('./config/flashMiddleware')
 
 
 
@@ -84,6 +86,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuth)
+//after the session is defined and all then use flash 
+app.use(flash());
+
+app.use(customMiddleware_flash.setFlash);
 
 // use express router
 app.use('/',require('./routes/index'))

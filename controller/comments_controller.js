@@ -2,10 +2,11 @@ const comment_collection=require('../models/comment');
 const post_collection=require('../models/posts');
 
 // add a comment
-module.exports.addComment=function(req,resp){
+module.exports.addComment=async function(req,resp){
     // console.log(req.body)
 
     // find the post using post id
+    /*
     post_collection.findById(req.body.post_id,(error,post)=>{
         if(error){
             console.log('error');
@@ -38,6 +39,32 @@ module.exports.addComment=function(req,resp){
 
 
     })
+    */
+
+    try{
+        let post=await post_collection.findById(req.body.post_id)
+        if(post)
+        {
+            let comm=await comment_collection.create(
+            {
+                content:req.body.comment,
+                user:req.user.id,
+                post:req.body.post_id
+            })
+            await post.comments.push(comm); //it'll automatically fetch the id from comm and push it
+            await post.save(); //update
+            console.log(comm);
+        }
+        resp.redirect('back');
+
+    }
+    catch(err)
+    {
+        console.log("Error",err);
+        return;
+    }
+    
+    
 
     
    
@@ -46,9 +73,10 @@ module.exports.addComment=function(req,resp){
 
 
 //remove a comment
-module.exports.destroy=(req,resp)=>{
+module.exports.destroy=async (req,resp)=>{
     const comment_id=req.params.comment_id;
     //find comment
+    /*
     comment_collection.findById(comment_id,(error,comment)=>{
         //authorize that the comment is posted by same user who is logged in or not
         if(req.user.id==comment.user){
@@ -67,7 +95,7 @@ module.exports.destroy=(req,resp)=>{
             let post_id=comment.post
             post_collection.findById(post_id,(error,post)=>{
                 //if post is yours and some one else is commented u can delete it
-                if(req.user.id=post.user)
+                if(req.user.id==post.user)
                 {
                     comment.remove();
                     post_collection.findByIdAndUpdate(post_id,{$pull:{comments:comment_id}},(err,post)=>{
@@ -84,4 +112,24 @@ module.exports.destroy=(req,resp)=>{
             
         }
     })
+   */
+  try{
+        let comment=await comment_collection.findById(comment_id);
+        let post_id=comment.post;
+        //checking if the logged in person is post creator then he can delete all comments in his post
+        let post=await post_collection.findById(post_id);
+        if(req.user.id==comment.user || req.user.id==post.user){
+        comment.remove();
+        //find the post and delete that comment from comments array
+        await post_collection.findByIdAndUpdate(post_id,{$pull:{comments:comment_id}})
+
+
+        }
+        resp.redirect('back')
+    }
+    catch(err){
+        console.log("Error",err);
+        return;
+    }
+  
 }

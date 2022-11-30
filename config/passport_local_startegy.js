@@ -5,12 +5,17 @@ const userCollection=require('../models/user')
 
 
 passport.use(new Localstartegy({
-    usernameField:'email'
+    usernameField:'email',
+    passReqToCallback:true // optional , by settin this true we can use req in callback function
 
-},function(email,password,done){
+},function(req,email,password,done){
     userCollection.findOne({email:email},function(error,user){
-        if(error){console.log("error in fetching recoed  ",error);return done(error);}
+        if(error){
+            req.flash('error',error);
+            return done(error);}
         if(!user || user.password!=password){
+            req.flash('error','Invalid username/password');
+
             return done(null,false);
         }
         return done(null,user);
