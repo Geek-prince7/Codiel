@@ -23,9 +23,11 @@ module.exports.newPost=function(req,resp){
 //converting it to async await
 //delete post
 module.exports.destroy=async (req,resp)=>{
+    
+    /*
     //post id
     const post_id=req.params.id
-    /*
+    
     post_collection.findById(post_id,(error,post)=>{
         //authorization
         // id means string(_id) auto convert
@@ -52,6 +54,8 @@ module.exports.destroy=async (req,resp)=>{
 
 
     try{
+        //post id
+        const post_id=req.params.id
         let post=await post_collection.findById(post_id);
         // id means string(_id) auto convert
         if(post.user==req.user.id)
