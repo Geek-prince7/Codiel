@@ -8,13 +8,32 @@ module.exports.posts=function(req,resp){
 
 
 //new post create --> post form handle
-module.exports.newPost=function(req,resp){
-    post_collection.create({content:req.body.content,user:req.user.id},function(error,usr){
-        if(error){console.log("error in saving post --------");return;}
-        console.log(usr);
-        req.flash('success','post created successfully');
+module.exports.newPost=async function(req,resp){
+    try{
+        //detect if its an ajax request
+        if(req.xhr){
+            
+            let post=await (await post_collection.create({content:req.body.content,user:req.user.id})).populate('user')
+            return resp.status(200).json({
+                data:{
+                    post:post
+                },
+                message:'post created'
+            })
+        }
+        //if its not an ajax request 
+        let post=await post_collection.create({content:req.body.content,user:req.user.id})
+        if(post)
+        {
+            req.flash('success','post created successfully');
+        }
         return resp.redirect('back')
-    })
+    }
+    catch(error)
+    {
+        req.flash('error','post not created');
+        return resp.redirect('back')
+    }
     
 
 }
@@ -54,6 +73,7 @@ module.exports.destroy=async (req,resp)=>{
 
 
     try{
+
         //post id
         const post_id=req.params.id
         let post=await post_collection.findById(post_id);
@@ -62,6 +82,15 @@ module.exports.destroy=async (req,resp)=>{
         {
             await post.remove();
             await comment_collection.deleteMany({post:post_id})
+            if(req.xhr)
+            {
+                return resp.status(200).json({
+                    data:{
+                        post_id:post_id
+                    },
+                    message:'deleted successfully'
+                })
+            }
             req.flash('success','post deleted')
             return resp.redirect('back');
 

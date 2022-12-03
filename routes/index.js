@@ -9,4 +9,12 @@ router.get('/',passport.checkAuth,homeController.home)
 router.use('/users',require('./user'))
 router.use('/posts',require('./posts'))
 router.use('/comments',require('./comments'))
+
+
+
+//for api requests
+
+//by default it''ll go to index.js so -> we can avoid writing this require('./api/index')
+router.use('/api',require('./api'))
+
 module.exports=router

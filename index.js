@@ -7,6 +7,7 @@ const db=require('./config/mongoose')
 const session=require('express-session')
 const passport=require('passport')
 const passportLocal=require('./config/passport_local_startegy');
+const passport_jwt=require('./config/passport_jwt_strategy');
 const  userCollection  = require('./models/user');
 // const postsCollection=require('./models/posts')
 // const MongoStore=require('connect-mongodb-session')(session)
@@ -16,6 +17,7 @@ const userController=require('./controller/user_controller')
 const sassMiddleware=require('node-sass-middleware')
 const flash=require('connect-flash')
 const customMiddleware_flash=require('./config/flashMiddleware')
+
 
 
 
@@ -42,6 +44,9 @@ app.use(express.urlencoded())
 app.use(cookieParser())
 // add static files
 app.use(express.static('./assests'))
+
+//jooning the path
+app.use('/uploads',express.static(__dirname+'/uploads'))
 
 //layout
 app.use(expressLayout)

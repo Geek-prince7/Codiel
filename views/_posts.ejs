@@ -1,11 +1,11 @@
 
-<div class="post-container">
+<div id="post-<%= post.id %>" class="post-container">
     <div class="post-header">
         <h3><a href="/users/profile/<%= post.user.id %>"><%= post.user.name %></a>  </h3>
         <p>
             <%= JSON.stringify(post.user.updatedAt) %> 
             <% if(locals.user && locals.user.id==post.user.id){ %>
-        |   <a href="/posts/destroy/<%= post.id %>"> delete</a>
+        |   <a class="delete-post-btn" href="/posts/destroy/<%= post.id %>"> delete</a>
             <% } %>
         </p>
 

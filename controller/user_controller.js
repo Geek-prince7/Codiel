@@ -1,5 +1,9 @@
 const userCollection=require('../models/user')
 
+//to delete existing avatar if new updated
+const fs=require('fs')
+const path=require('path')
+
 module.exports.user=function(req,resp){
     //we have used cookie parser in index.js so we can see cookie
     console.log(req.cookies)
@@ -16,14 +20,53 @@ module.exports.user=function(req,resp){
 
 
 //update user's info
-module.exports.update=(req,resp)=>{
+module.exports.update=async(req,resp)=>{
+    // if(req.user.id==req.params.id)
+    // {
+    //     userCollection.findByIdAndUpdate(req.params.id,req.body,(error,user)=>{
+    //         if(error){return;}
+    //         return resp.redirect('back')
+
+    //     })
+    // }
+    // else{
+    //     return resp.status(401).send('unauthorized')
+    // }
+
+
     if(req.user.id==req.params.id)
     {
-        userCollection.findByIdAndUpdate(req.params.id,req.body,(error,user)=>{
-            if(error){return;}
-            return resp.redirect('back')
-
-        })
+        try{
+            let user=await userCollection.findById(req.params.id)
+            userCollection.uploadedAvatar(req,resp,(error)=>{
+                if(error){
+                    console.log("************* Multer error ***********",error)
+                }
+                user.name=req.body.name;
+                user.email=req.body.email;
+                if(req.file){
+                    //check if in database avatar of this user already exist
+                    if(user.avatar)
+                    {
+                        //check if file can be accessible
+                        if(fs.existsSync(path.join(__dirname,'..',user.avatar))){
+                            //deleting the file
+                            fs.unlinkSync(path.join(__dirname,'..',user.avatar))
+                        }
+                    }
+                    user.avatar=userCollection.avatar_path+'/'+req.file.filename;
+                }
+                user.save()
+                return resp.redirect('back')
+            })
+            
+            
+        }
+        catch(error)
+        {
+            console.log("error");
+            return;
+        }
     }
     else{
         return resp.status(401).send('unauthorized')

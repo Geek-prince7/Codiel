@@ -1,11 +1,16 @@
 <div class="content-section">
+
+    <div id="image-container">
+    <img src="<%= profile_user.avatar%>" alt="users has no avtar" width="100px">
+    </div>
     
 
     <% if(user.id==profile_user.id){ %>
         <!-- if user matches then show profile update form update name,email -->
-        <form action="/users/update/<%= profile_user.id %>" method="post">
+        <form action="/users/update/<%= profile_user.id %>" method="post" enctype="multipart/form-data">
             <input name="name" placeholder="Enter name" type="text" value="<%= profile_user.name %>" required><br>
             <input name="email" placeholder="Enter email" type="email" value="<%= profile_user.email %>" required><br>
+            <input type="file" placeholder="profile picture" name="avatar"><br>
             <button type="submit">update</button>
 
         </form>
