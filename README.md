@@ -1,12 +1,13 @@
 # Codiel
 <ul>
 <li>Social media project</li>
-using -> node js,Express js
-Template engine -> ejs
-Database -> mongoDB
-for session used -> passport js,express session,passport-local-strategy
-for file upload -> used multer
-features implemented -> post,comment,like,profile view,add friends,realtime chat
+<li>using -> node js,Express js</li>
+<li>Template engine -> ejs</li>
+<li>Database -> mongoDB</li>
+<li>for session used -> passport js,express session,passport-local-strategy</li>
+<li>for file upload -> used multer</li>
+<li>features implemented -> post,comment,like,profile view,add friends,realtime chat</li>
+<li>-----------------------I am still working on this project ----------------------------------------</li>
 </ul>
 
 
