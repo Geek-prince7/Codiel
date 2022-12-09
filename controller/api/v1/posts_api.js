@@ -22,12 +22,20 @@ module.exports.destroy=async (req,resp)=>{
         const post_id=req.params.id
         let post=await posts_collection.findById(post_id);
         // id means string(_id) auto convert
-        
+        if(post.user==req.user.id)
+        {
             await post.remove();
             await comment_collection.deleteMany({post:post_id})
             return resp.json(200,{
                 message:'posts and associated comment deleted successfully'
             })
+        }
+        else
+        {
+            return resp.json(401,{
+                message:'you are not authorizd to delete'
+            })
+        }
 
             
         

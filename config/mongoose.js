@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-mongoose.connect('mongodb://localhost/codiel_development');
+mongoose.connect('mongodb://127.0.0.1/codiel_development');
 
 const db=mongoose.Connection;
 // console.log(db)

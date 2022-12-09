@@ -27,6 +27,12 @@ router.post('/login',passport.authenticate(
 router.get('/sign-out',userController.destroySession);
 
 
+//for github signin auth
+router.get('/auth/github',passport.authenticate('github',{scope:['user:email','read:user']}))
+
+router.get('/auth/github/callback',passport.authenticate('github',{failureRedirect:'/users/sign-in'}),userController.login);
+
+
 
 
 

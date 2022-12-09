@@ -5,7 +5,7 @@ const extractJWT=require('passport-jwt').ExtractJwt;
 const user_collection=require('../models/user');
 
 let opts={
-    jwtFromRequest:extractJWT.fromAuthHeaderAsBearerToken,
+    jwtFromRequest:extractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey:'codiel' //we can use hex code here
 }
 
