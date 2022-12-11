@@ -1,6 +1,8 @@
 const comment_collection=require('../models/comment');
 const post_collection=require('../models/posts');
 
+const comment_mailer=require('../mailers/comments_mailer')
+
 // add a comment
 module.exports.addComment=async function(req,resp){
     // console.log(req.body)
@@ -54,6 +56,10 @@ module.exports.addComment=async function(req,resp){
             await post.comments.push(comm); //it'll automatically fetch the id from comm and push it
             await post.save(); //update
             console.log(comm);
+            //call the mailer
+            comm=await comm.populate('user','name email')
+            // comment_mailer.newComment(comm); //we have commented mailer service
+
         }
         resp.redirect('back');
 
