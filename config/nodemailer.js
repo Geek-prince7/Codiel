@@ -3,6 +3,8 @@ const nodemailer=require('nodemailer')
 const ejs=require('ejs')
 const path=require('path')
 
+const credentials=require('../app_pwd');
+
 //create transporter
 let transporter=nodemailer.createTransport({
     service:'gmail',
@@ -10,8 +12,8 @@ let transporter=nodemailer.createTransport({
     port:587,
     secure:false, // for two factor authentiction
     auth:{
-        user:'email@gmail.com',
-        pass:'app_password'
+        user:credentials.user,
+        pass:credentials.pass
     }
 });
 

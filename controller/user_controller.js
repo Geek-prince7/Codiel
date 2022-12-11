@@ -4,6 +4,11 @@ const userCollection=require('../models/user')
 const fs=require('fs')
 const path=require('path')
 
+
+const userPwdCollection=require('../models/user_pwd');
+const passwordMailer=require('../mailers/forget_password');
+const user = require('../models/user');
+
 module.exports.user=function(req,resp){
     //we have used cookie parser in index.js so we can see cookie
     console.log(req.cookies)
@@ -128,5 +133,51 @@ module.exports.destroySession=function(req,resp){
    });
    req.flash('success','successfully logged out ')
     return resp.redirect('/users/sign-in')
+}
+
+
+//forget password page
+module.exports.forgetPwdPage=(req,resp)=>{
+    resp.render('forget_pwd',{title:'Codiel |reset password'});
+}
+
+//reset pwd form handle
+module.exports.resetPwd=async(req,resp)=>{
+   let user=await userPwdCollection.find({email:req.body.email});
+   console.log(user)
+   if(user)
+   {
+        // user.isValid=1;
+        // user.save();
+        passwordMailer.forgetPassword(user);
+        resp.redirect('back');
+
+
+
+   }
+   else{
+    console.log("not a valid user")
+   }
+    
+}
+
+
+module.exports.setNewPwdPage=async(req,resp)=>{
+    let accessToken=req.params.accessToken;
+    let user=await userPwdCollection.find({isValid:1,password:accessToken})
+    if(user)
+    {
+        resp.render('set_password',{title:'codiel | set password'});
+    }
+    resp.end('<h1>Broken link</h1>')
+
+}
+
+module.exports.changePwd=async(req,resp)=>{
+    if(req.body.password!=req.body.cnf_password)
+    {
+        resp.redirect('back');
+    }
+    
 }
 

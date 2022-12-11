@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<div class="main-home">
+    <section id="feed-posts">
+        <h2>Posts</h2>
+        <form id="new-post-form" class="form" action="/posts/new-post" method="post">
+            <textarea name="content" placeholder="Write your post..." rows="5" cols="30" required></textarea><br>
+            <button type="submit">Post</button>
+
+        </form>
+    
+        <div class="view-posts">
+            <div id="posts-list-container">
+                
+                <% for(let post of posts){ %>
+                    <%- include('_posts',{post:post}) -%>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    <section id="user-friends">
+        <%- include('_userLists') -%>
+
+    </section>
+</div>
+       

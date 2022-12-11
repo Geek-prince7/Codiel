@@ -1,0 +1,22 @@
+<!-- partial -->
+<link rel="stylesheet" href="/css/headers.css">
+<header>
+    <div>
+        <!-- this is header -->
+        <div class="header-div">
+            <div><i class="fa-sharp fa-solid fa-solar-panel"></i><span> Codiel</span></div>
+            <ul class="list-ul">
+                <li class="search-bar"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search.." name="search"></li>
+                <% if(locals.user){ %>
+                    <!-- locals.user or user are same -->
+                    <li><i class="fa-solid fa-user"></i> <span><%=locals.user.name%></span> </li>
+                    <li> <a href="/users/sign-out"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></li>
+                    <!-- <li> <a href="/users/profile">Profile</a></li>   -->
+                <% }else{ %>
+                    <li><a href="/users/sign-in"><i class="fa-solid fa-user"></i> Sign In</a></li> 
+                    <li><a href="/users/sign-up"><i class="fa-solid fa-square-plus"></i> Sign Up</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</header>

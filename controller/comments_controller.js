@@ -3,6 +3,9 @@ const post_collection=require('../models/posts');
 
 const comment_mailer=require('../mailers/comments_mailer')
 
+// const queue=require('../config/kue')
+// const commentEmailWorker=require('../kue_workers/commentEmailerWorker');
+
 // add a comment
 module.exports.addComment=async function(req,resp){
     // console.log(req.body)
@@ -58,7 +61,9 @@ module.exports.addComment=async function(req,resp){
             console.log(comm);
             //call the mailer
             comm=await comm.populate('user','name email')
-            // comment_mailer.newComment(comm); //we have commented mailer service
+            // comment_mailer.newComment(comm); //we have commented mailer service to add in a queue
+            // let job=queue.create('emails',comm).save()
+
 
         }
         resp.redirect('back');

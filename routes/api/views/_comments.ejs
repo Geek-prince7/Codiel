@@ -1,0 +1,8 @@
+
+<p class="single-comment-box" id="<%= comment.id %>">
+    <a href="/users/profile/<%= comment.user.id %>"><%= comment.user.name%></a> :<%= comment.content %>
+    <% if(locals.user.id && (locals.user.id==comment.user.id || locals.user.id==post.user.id)){ %>
+         |<a href="/comments/destroy/<%= comment.id %>"> delete</a>
+    <% } %> 
+    
+</p>

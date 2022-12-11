@@ -3,6 +3,7 @@ const router=express.Router()
 
 const userController=require('../controller/user_controller')
 const passport=require('passport')
+// const { app } = require('kue')
 
 console.log("user controller")
 
@@ -35,7 +36,18 @@ router.get('/auth/github/callback',passport.authenticate('github',{failureRedire
 
 
 
+//forget pwd page
+router.get('/forget_pwd',userController.forgetPwdPage);
+
+//reset password form
+router.post('/reset-pass',userController.resetPwd);
 
 
+//handle new gmail reset password link
+router.get('/reset-password',userController.setNewPwdPage);
+
+
+//handle new password form
+router.post('/newPassword',userController.changePwd)
 
 module.exports=router
