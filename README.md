@@ -4,10 +4,12 @@
 <li>using -> node js,Express js</li>
 <li>Template engine -> ejs</li>
 <li>Database -> mongoDB</li>
-<li>for session used -> passport js,express session,passport-local-strategy,passport-jwt</li>
+<li>for session used -> passport js,express session,passport-local-strategy,passport-jwt,passport-github-oauth</li>
 <li>for file upload -> used multer</li>
 <li>features implemented -> post,comment,like,profile view,add friends,realtime chat</li>
 <li>MVC architecture used</li>
+<li>for mailing service-nodemailer</li>
+<li>For paraller jobs/delayed jobs - kue.js on redis server</li>
 <li>-----------------------I am still working on this project ----------------------------------------</li>
 </ul>
 
