@@ -147,9 +147,8 @@ module.exports.resetPwd=async(req,resp)=>{
    console.log(user)
    if(user)
    {
-        // user.isValid=1;
-        // user.save();
-        passwordMailer.forgetPassword(user);
+        await userPwdCollection.findOneAndUpdate({email:req.body.email},{isValid:1});
+        await passwordMailer.forgetPassword(user);
         resp.redirect('back');
 
 
@@ -163,21 +162,34 @@ module.exports.resetPwd=async(req,resp)=>{
 
 
 module.exports.setNewPwdPage=async(req,resp)=>{
-    let accessToken=req.params.accessToken;
+    // console.log("accss token",req.query.accessToken)
+    let accessToken=req.query.accessToken
     let user=await userPwdCollection.find({isValid:1,password:accessToken})
     if(user)
     {
-        resp.render('set_password',{title:'codiel | set password'});
+        resp.render('set_password',{title:'codiel | set password',accessToken:req.query.accessToken});
     }
     resp.end('<h1>Broken link</h1>')
 
 }
 
 module.exports.changePwd=async(req,resp)=>{
+    console.log("request body is ",req.body);
     if(req.body.password!=req.body.cnf_password)
     {
         resp.redirect('back');
     }
+    let accessToken=req.body.accessToken;
+    let user=await userPwdCollection.findOne({isValid:1,password:accessToken})
+    if(user)
+    {
+        let ur=await userCollection.findOneAndUpdate({email:user.email},{password:req.body.password});
+        
+        await userPwdCollection.findOneAndUpdate({password:accessToken,isValid:1},{isValid:0});
+        resp.redirect('/users/sign-in');
+    }
+    resp.redirect('back');
+
     
 }
 

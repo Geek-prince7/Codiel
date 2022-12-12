@@ -38,6 +38,27 @@
       padding: 3px;
       border-radius: 10px;
       border: none; }
+  .form-div .oauth-links {
+    width: fit-content;
+    margin: auto; }
+    .form-div .oauth-links .github-oauth {
+      border: none;
+      width: fit-content;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      background-color: black; }
+      .form-div .oauth-links .github-oauth img {
+        width: 30px;
+        height: 30px; }
+      .form-div .oauth-links .github-oauth a {
+        color: white;
+        width: fit-content; }
+  .form-div .forget-pwd {
+    width: fit-content;
+    margin: auto;
+    padding: 8px; }
   .form-div h6 {
     width: fit-content;
+    padding: 10px;
     margin: auto; }

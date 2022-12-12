@@ -60,9 +60,44 @@ $Text_color:black;
 
         }
         
+        
+    }
+    .oauth-links{
+        width: fit-content;
+        margin: auto;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        
+        .github-oauth{
+            border: none;
+            width: fit-content;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            
+            
+            background-color: black;
+            img{
+                width: 30px;
+                height: 30px;
+                // background-color: black;
+            }
+            a{
+                color: white;
+                width: fit-content;
+            }
+        }
+    }
+    .forget-pwd{
+        // margin-top: 10px;
+        width: fit-content;
+        margin: auto;
+        padding: 8px;
     }
     h6{
         width: fit-content;
+        padding: 10px;
         margin: auto;
     }
 }
