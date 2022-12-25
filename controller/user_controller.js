@@ -86,12 +86,16 @@ module.exports.signin=function(req,resp){
 
 //render signup page
 module.exports.signup=function(req,resp){
-    return resp.render('user_sign_up',{title:"Codeil | Sign Up"})
+    let country=['India','Indonesia']
+    return resp.render('user_sign_up',{title:"Codeil | Sign Up",country:country})
 }
 
 
 //signup response
 module.exports.createUser=function(req,resp){
+
+
+    console.log("req body is ---------------------------> \n",req.body)
     if(req.body.password!=req.body.cnf_password)
     {
         return resp.redirect('back')
@@ -99,7 +103,7 @@ module.exports.createUser=function(req,resp){
     userCollection.create(req.body,function(error,data){
         if(error)
         {
-            console.log("----------------------------- error in saving data --------------------------------")
+            console.log("----------------------------- error in saving data --------------------------------",error)
             return resp.redirect('back')
         }
         console.log(data)
@@ -149,13 +153,14 @@ module.exports.resetPwd=async(req,resp)=>{
    {
         await userPwdCollection.findOneAndUpdate({email:req.body.email},{isValid:1});
         await passwordMailer.forgetPassword(user);
-        resp.redirect('back');
+        resp.end("<h1>Check your mail reset link is provided</h1>")
 
 
 
    }
    else{
     console.log("not a valid user")
+    resp.redirect("back")
    }
     
 }

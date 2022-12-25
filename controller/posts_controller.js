@@ -1,5 +1,6 @@
 const post_collection=require('../models/posts')
 const comment_collection=require('../models/comment')
+const likes_collection=require('../models/like')
 
 // /posts -> handle
 module.exports.posts=function(req,resp){
@@ -80,6 +81,12 @@ module.exports.destroy=async (req,resp)=>{
         // id means string(_id) auto convert
         if(post.user==req.user.id)
         {
+            //delete likes on post
+            await likes_collection.deleteMany({likeable:post,onModel:'posts'})
+
+            //delete likes assosiated on comments
+            await likes_collection.deleteMany({_id:{$in:post.comments}})
+
             await post.remove();
             await comment_collection.deleteMany({post:post_id})
             if(req.xhr)

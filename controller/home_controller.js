@@ -1,5 +1,6 @@
 const postsCollection=require('../models/posts')
 const userCollection=require('../models/user')
+const likesCollection=require('../models/like')
 
 
 
@@ -50,9 +51,11 @@ module.exports.home=async function(req,resp){
         let posts=await postsCollection.find({})
         .sort('-createdAt')
         .populate('user')
-        .populate({path:'comments',populate:{path:'user'}});
+        .populate({path:'comments',populate:{path:'user'}})
+        .populate({path:'likes',populate:{path:'user'}});
 
         let users=await userCollection.find({});
+        // console.log("--------------------------posts------------------------\n",posts,'\n----------------------------->')
 
 
         resp.render(

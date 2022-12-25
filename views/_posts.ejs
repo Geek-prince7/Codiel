@@ -7,11 +7,29 @@
             <% if(locals.user && locals.user.id==post.user.id){ %>
         |   <a class="delete-post-btn" href="/posts/destroy/<%= post.id %>"> delete</a>
             <% } %>
+            
         </p>
 
     </div>
     <div class="post-content">
         <%= post.content %>
+    </div>
+    <div class="likes-container">
+        <a href="/likes/toggle?id=<%= post._id %>&type=posts"> 
+            <i class="fa-regular fa-heart"></i>
+        </a>
+        <% let likes=post.likes.length %>
+        <% if(likes>0){ %>
+           <%= likes %>
+           <% if(likes>1){ %>
+                likes
+            <% }else{ %>
+                like
+
+            <% } %>
+             
+        <% } %> 
+        
     </div>
     
     <div class="comment-container">

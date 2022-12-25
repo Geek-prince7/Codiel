@@ -23,6 +23,10 @@ const userSchema=new mongoose.Schema({
     },
     avatar:{
         type:String
+    },
+    country:{
+        type:String,
+        required:true
     }
 
 },

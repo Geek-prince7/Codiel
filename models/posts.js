@@ -18,6 +18,13 @@ const postSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:'comments'
         }
+    ],
+    //storing likes object ids array associated to that post to fetch faster
+    likes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'likes'
+        }
     ]
 
 },{

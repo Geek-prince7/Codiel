@@ -4,5 +4,21 @@
     <% if(locals.user.id && (locals.user.id==comment.user.id || locals.user.id==post.user.id)){ %>
          |<a href="/comments/destroy/<%= comment.id %>"> delete</a>
     <% } %> 
-    
+</p>
+<p class="likes-container">
+    <a href="/likes/toggle?id=<%= comment._id %>&type=comments"> 
+        <i class="fa-regular fa-heart"></i>
+    </a>
+    <% let likes=comment.likes.length %>
+    <% if(likes>0){ %>
+       <%= likes %>
+       <% if(likes>1){ %>
+            likes
+        <% }else{ %>
+            like
+
+        <% } %>
+         
+    <% } %> 
+
 </p>

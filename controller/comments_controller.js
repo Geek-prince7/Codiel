@@ -5,6 +5,7 @@ const comment_mailer=require('../mailers/comments_mailer')
 
 const queue=require('../config/kue')
 const commentEmailWorker=require('../kue_workers/commentEmailerWorker');
+const likesCollection = require('../models/like');
 
 // add a comment
 module.exports.addComment=async function(req,resp){
@@ -130,9 +131,12 @@ module.exports.destroy=async (req,resp)=>{
         //checking if the logged in person is post creator then he can delete all comments in his post
         let post=await post_collection.findById(post_id);
         if(req.user.id==comment.user || req.user.id==post.user){
-        comment.remove();
-        //find the post and delete that comment from comments array
-        await post_collection.findByIdAndUpdate(post_id,{$pull:{comments:comment_id}})
+            comment.remove();
+            //find the post and delete that comment from comments array
+            await post_collection.findByIdAndUpdate(post_id,{$pull:{comments:comment_id}})
+
+            //delete all the likes associated to that comment
+            likesCollection.deleteMany({likeable:comment._id,onModel:'comments'})
 
 
         }

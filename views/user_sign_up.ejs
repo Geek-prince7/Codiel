@@ -6,6 +6,12 @@
         <input type="email" placeholder="Enter Email" name="email" required><br>
         <input type="password" placeholder="Enter password" name="password" required><br>
         <input type="password" placeholder="Confirm password" name="cnf_password" required><br>
+        <lable>Country</lable>
+        <select name="country">
+            <% for(let i of country){ %>
+                <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
         <button type="submit">signIn</button>
     </form>
     <p><a href="/users/auth/github">Github login/signup</a></p>
