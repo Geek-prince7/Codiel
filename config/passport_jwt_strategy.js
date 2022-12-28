@@ -28,5 +28,15 @@ passport.use(new jwtStrategy(opts,function(jwt_payload,done){
 
 }))
 
+// passport.checkJwtAuth=(req,resp,next)=>{
+//     console.log(req.isAuthenticated())
+//     if(req.isAuthenticated())
+//     {
+//         return next();
+//     }
+//     return resp.json(500,{message:"bhai jwt bhej header m "})
+
+// }
+
 
 module.exports=passport;

@@ -26,8 +26,12 @@ const userSchema=new mongoose.Schema({
     },
     country:{
         type:String,
-        required:true
-    }
+        required:false
+    },
+    friends:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'friends'
+    }]
 
 },
 {

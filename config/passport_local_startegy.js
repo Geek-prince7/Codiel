@@ -60,7 +60,7 @@ passport.setAuth=function(req,resp,next){
 passport.disableLogin=function(req,resp,next){
     if(req.isAuthenticated())
     {
-        return resp.redirect('/users/profile');
+        return resp.redirect('/');
     }
     return next();
 

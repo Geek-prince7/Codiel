@@ -8,18 +8,36 @@ const path=require('path')
 const userPwdCollection=require('../models/user_pwd');
 const passwordMailer=require('../mailers/forget_password');
 const user = require('../models/user');
+const friendsCollection = require('../models/friends');
 
-module.exports.user=function(req,resp){
+module.exports.user=async function(req,resp){
     //we have used cookie parser in index.js so we can see cookie
     console.log(req.cookies)
     //we can change cookie val also
     // resp.cookie('name','abc')
     //add new cookie
     // resp.cookie('new cookie','new val')
-    userCollection.findById(req.params.id,(error,user)=>{
-        return resp.render('profile',{title:'Codiel | profile',profile_user:user})
+    let user=await userCollection.findById(req.params.id)
+    let friend;
+    if(user)
+    {
+        //check if req.user is friend with this user or not
+        friend=await friendsCollection.findOne({req_user:req.user,friend_user:user})
+        if(!friend){
+            friend=await friendsCollection.findOne({friend_user:req.user,req_user:user})
+            
+        }
 
-    })
+    }
+    
+    return resp.render(
+        'profile',
+        {
+            title:'Codiel | profile',
+            profile_user:user,
+            friend:friend
+        }
+    )
     
 }
 

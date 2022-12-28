@@ -21,6 +21,13 @@
         <!-- <p>id  : <%=profile_user.id%></p> -->
         <p>email: <%=profile_user.email%></p>
         <!-- <p>passwod :<%=profile_user.password%> </p> -->
+        <div>
+            <% if(friend){ %>
+                <%= profile_user.name %> is your friend
+            <% } else{ %>
+                <button><a href="/friends/add-friend?friend_id=<%= profile_user._id %>">Add friend</a></button>
+            <% } %>
+        </div>
 
     <% } %>
     

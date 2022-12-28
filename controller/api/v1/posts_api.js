@@ -1,6 +1,7 @@
 const posts_collection=require('../../../models/posts');
 const comment_collection=require('../../../models/comment')
 
+//list posts
 module.exports.index=async (req,resp)=>{
     let posts=await posts_collection.find({})
         .select('content user comments createdAt')   //selecting only id content user and comments from posts
@@ -13,8 +14,26 @@ module.exports.index=async (req,resp)=>{
     })
 }
 
+//create a post
+module.exports.create=async(req,resp)=>{
+    try{
+        let newPost=await(await posts_collection.create({content:req.body.content,user:req.user._id})).populate('user','email name avatar');
+        if(newPost)
+        {
+            return resp.json(200,{
+                message:"sucess",
+                data:newPost
+            })
+        }
+    }
+    catch{
+        return resp.json(400,{
+            message:"internal server error"
+        })
+    }
+}
 
-//delete post
+//delete a post
 module.exports.destroy=async (req,resp)=>{ 
     try{
 
