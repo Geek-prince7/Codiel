@@ -21,6 +21,13 @@ module.exports.chatSocket=(socketServerer)=>{
             //server emits that the user has joined 
             io.in(data.chatRoom).emit('user_joined',data)
 
+            
+            
+
+        })
+        socket.on('send_msg',(data)=>{
+            console.log(`msg to be send ${data.message} + from user ${data.userEmail} in chat room ${data.chatRoom}`);
+            io.in(data.chatRoom).emit('msg_received',data);
         })
 
     })

@@ -24,6 +24,9 @@
         display: inline;
         padding: 15px;
         background-color: #ffa0a0; }
+      #user-chat-box #chat-messages-list .self-msg sub {
+        margin-top: 12px;
+        display: block; }
     #user-chat-box #chat-messages-list .other-msg {
       text-align: left;
       padding: 15px 5px; }
@@ -31,6 +34,9 @@
         display: inline;
         padding: 15px;
         background-color: #a0dcff; }
+      #user-chat-box #chat-messages-list .other-msg sub {
+        margin-top: 12px;
+        display: block; }
   #user-chat-box #chat-msg-input-container {
     height: 11.5%;
     width: 100%;
