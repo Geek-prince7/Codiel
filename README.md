@@ -7,6 +7,7 @@
 <li>for session used -> passport js,express session,passport-local-strategy,passport-jwt,passport-github-oauth</li>
 <li>for file upload -> used multer</li>
 <li>features implemented -> post,comment,like,profile view,add friends,realtime chat</li>
+<li>used noty.js for flash notification like login,logout,post created,deleted etc.</li>
 <li>MVC architecture used</li>
 <li>for mailing service-nodemailer</li>
 <li>For paraller jobs/delayed jobs - kue.js on redis server</li>
