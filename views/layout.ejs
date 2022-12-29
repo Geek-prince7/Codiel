@@ -18,7 +18,7 @@
         <%- body %>
         <%- include('_footer'); %>
         <script>
-            <% if(flash.success && flash.success.length>0){ %>
+            '<% if(flash.success && flash.success.length>0){ %>'
                 new Noty({
                     theme:'relax',
                     text:"<%= flash.success %>",
@@ -27,9 +27,9 @@
                     timeout:2000
 
                 }).show()
-            <% } %>
+            '<% } %>'
 
-            <% if(flash.error && flash.error.length>0){ %>
+            '<% if(flash.error && flash.error.length>0){ %>'
                 new Noty({
                     theme:'relax',
                     text:"<%= flash.error %>",
@@ -38,11 +38,13 @@
                     timeout:2000
 
                 }).show()
-            <% } %>
+            '<% } %>'
 
         </script>
         
         <script src="https://kit.fontawesome.com/74e711aaac.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="/js/home_posts.js"></script>
+        <%- script %>
+        
     </body>
 </html>

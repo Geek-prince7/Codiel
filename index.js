@@ -27,7 +27,15 @@ const customMiddleware_flash=require('./config/flashMiddleware')
 
 
 
+
 const app=express();
+
+//setup chat server to be used with socket.io
+const chatServer=require('http').Server(app)
+const chatSocket=require('./config/chat_socket').chatSocket(chatServer);
+chatServer.listen(5000);
+console.log(`chat server is running on port : 5000`)
+
 
 /* ---------Middle ware ------------- */
 app.use(sassMiddleware({

@@ -1,6 +1,19 @@
-<h4>Friends</h4>
+<h2>Codiel users</h2>
 <% for(let user of all_users){ %>
     <p>
         <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
     </p>
+<% } %>
+
+<h2>Friends</h2>
+<% for(let friend of friends){ %>
+    <% if(friend.req_user.id!=user.id) { %>
+        <p>
+            <a href="/users/profile/<%= friend.req_user.id %>"><%= friend.req_user.name %></a>
+        </p>
+    <% }else{ %>
+        <p>
+            <a href="/users/profile/<%= friend.friend_user.id %>"><%= friend.friend_user.name %></a>
+        </p>
+    <% } %>
 <% } %>

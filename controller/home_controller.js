@@ -56,14 +56,17 @@ module.exports.home=async function(req,resp){
 
         let users=await userCollection.find({});
         // console.log("--------------------------posts------------------------\n",posts,'\n----------------------------->')
-
-
+        let friendsList=await userCollection.findById(req.user)
+        .populate({path:'friends',model:'friends',populate:[{path:'req_user',model:'users',select:'name email avatar'},{path:'friend_user',model:'users',select:'name email avatar'}]});
+        
+        // console.log('friend lists disp --------------------->',friendsList.friends)
         resp.render(
             'home',
             {
                 title:'codiel | home',
                 posts,
-                all_users:users
+                all_users:users,
+                friends:friendsList.friends
             });
         }
     catch(error)

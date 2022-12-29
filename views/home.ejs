@@ -22,5 +22,12 @@
         <%- include('_userLists') -%>
 
     </section>
+    <%- include('_chatbox.ejs') -%>
+    
 </div>
-       
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js" integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/chat_engine.js"></script>
+<!-- new chat engine instace -->
+<script>
+    new chatEngine('user-chat-box','<%= locals.user.email %>')
+</script>
