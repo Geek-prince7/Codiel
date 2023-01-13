@@ -15,6 +15,13 @@
 <li>-----------------------I am still working on this project ----------------------------------------</li>
 </ul>
 
+<h3>Real time chat using socket io</h3>
+<img width="960" alt="Screenshot_20221229_175948" src="https://user-images.githubusercontent.com/95235530/209951504-558b58c2-0d5c-4c21-ae67-a1b83644c2c8.png">
+
+<h3>sending and receiving msgs</h3>
+<img width="960" alt="Screenshot_20221229_180042" src="https://user-images.githubusercontent.com/95235530/209951562-748f2272-e9f7-4229-9af8-a30aefb91542.png">
+
+
 <h3> Github OAUth login </h3>
 <img width="947" alt="Screenshot_20221212_163807" src="https://user-images.githubusercontent.com/95235530/207030486-52e13497-4581-48a8-b46c-540759735985.png">
 
