@@ -1,12 +1,14 @@
 const passport=require('passport')
 const jwtStrategy=require('passport-jwt').Strategy;
 const extractJWT=require('passport-jwt').ExtractJwt;
+const env=require('./environment')
+
 
 const user_collection=require('../models/user');
 
 let opts={
     jwtFromRequest:extractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey:'codiel' //we can use hex code here
+    secretOrKey:env.passport_jwt_secret_key   //we can use hex code here instead of string
 }
 
 

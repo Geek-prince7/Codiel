@@ -3,7 +3,7 @@ const nodemailer=require('nodemailer')
 const ejs=require('ejs')
 const path=require('path')
 
-const credentials=require('../app_pwd');
+const env=require('./environment');
 
 //create transporter
 let transporter=nodemailer.createTransport({
@@ -12,8 +12,8 @@ let transporter=nodemailer.createTransport({
     port:587,
     secure:false, // for two factor authentiction
     auth:{
-        user:credentials.user,
-        pass:credentials.pass
+        user:env.nodemailer_credentials.email,
+        pass:env.nodemailer_credentials.pass
     }
 });
 

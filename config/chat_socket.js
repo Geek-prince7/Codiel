@@ -1,10 +1,11 @@
+const { app } = require('kue');
+
 module.exports.chatSocket=(socketServerer)=>{
     let io=require('socket.io')(socketServerer,{
         cors:{
             origin:"*"
         }
     });
-
     io.sockets.on('connection',(socket)=>{
         console.log(`new connection received socket_id: ${socket.id} `)
 

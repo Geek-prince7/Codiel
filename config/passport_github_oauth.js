@@ -1,15 +1,16 @@
 const passport=require('passport')
 const githubStrategy=require('passport-github2').Strategy;
 const crypto=require('crypto');
+const env=require('./environment')
 
 
 const user_collection=require('../models/user');
 
 //tell passport to use a new strategy for github sign in
 passport.use(new githubStrategy({
-        clientID:'e10cf7f89bbdbdbc9b5e',
-        clientSecret:'00a1106a3d90cc30e2c80b60eefe13d73efe28c3',
-        callbackURL:'http://localhost:8000/users/auth/github/callback'
+        clientID:env.github_oauth_cred.clientID,
+        clientSecret:env.github_oauth_cred.clientSecret,
+        callbackURL:env.github_oauth_cred.callbackURL
     },(accessToken,refreshToken,profile,done)=>{
         // console.log(profile)
         //find a user

@@ -1,5 +1,6 @@
 const mongoose=require('mongoose')
-mongoose.connect('mongodb://127.0.0.1/codiel_development');
+const env=require('./environment');
+mongoose.connect(`mongodb://127.0.0.1/${env.db_name}`); // env.db containes the name of database or document
 
 const db=mongoose.Connection;
 // console.log(db)

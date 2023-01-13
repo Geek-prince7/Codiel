@@ -1,4 +1,6 @@
 const express=require('express');
+const env=require('./config/environment');
+const morgan_logger=require('morgan')
 const expressLayout=require('express-ejs-layouts')
 const port=8000;
 const cookieParser=require('cookie-parser')
@@ -19,16 +21,15 @@ const sassMiddleware=require('node-sass-middleware')
 const flash=require('connect-flash')
 const customMiddleware_flash=require('./config/flashMiddleware')
 // const kue=require('kue')
-
-
-
-
-
-
-
+const cors=require('cors')
 
 
 const app=express();
+
+//allowing for local use
+app.use(cors({
+    origin:'*'
+}))
 
 //setup chat server to be used with socket.io
 const chatServer=require('http').Server(app)
@@ -36,16 +37,17 @@ const chatSocket=require('./config/chat_socket').chatSocket(chatServer);
 chatServer.listen(5000);
 console.log(`chat server is running on port : 5000`)
 
+if(env.name=='development'){
+    /* ---------Middle ware ------------- */
+    app.use(sassMiddleware({
+        src:'./assests/scss',
+        dest:'./assests/css',
+        debug:true,
+        outputStyle:'extended',
+        prefix:'/css'  
 
-/* ---------Middle ware ------------- */
-app.use(sassMiddleware({
-    src:'./assests/scss',
-    dest:'./assests/css',
-    debug:true,
-    outputStyle:'extended',
-    prefix:'/css'  
-
-}))
+    }))
+}
 
 //add default parser
 app.use(express.urlencoded())
@@ -53,10 +55,13 @@ app.use(express.urlencoded())
 //cookie parser
 app.use(cookieParser())
 // add static files
-app.use(express.static('./assests'))
+app.use(express.static(env.asset_path))
 
 //jooning the path
 app.use('/uploads',express.static(__dirname+'/uploads'))
+
+//logger middleware
+app.use(morgan_logger(env.morgan.mode,env.morgan.options))
 
 //layout
 app.use(expressLayout)
@@ -70,27 +75,19 @@ app.set('views','./views')
 
 app.use(session({
     name:'codiel11',//key of cookie
-    secret:'hello', // secret key
+    secret:env.session_cookie_key, // secret key
     saveUninitialized:false,
     resave:false,
     cookie:{
         maxAge:1000*60*100 // milliseconds 
 
     },
-    /*
-    Store:new MongoStore({
-        uri:'mongodb://localhost/',
-        databaseName:'codiel_development',
-        collection:'sess'
-        
-    }
-    */
     store: new MongoStore({
         mongoUrl :'mongodb://localhost/codiel_development',
         autoRemove:'interval',
         autoRemoveInterval:'1'
     }),function(error){
-        console.log(err || 'connect-mongo setup ok')
+        console.log(error || 'connect-mongo setup ok')
     }
     
     

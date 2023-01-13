@@ -4,7 +4,7 @@ const comment_collection=require('../../../models/comment')
 //list posts
 module.exports.index=async (req,resp)=>{
     let posts=await posts_collection.find({})
-        .select('content user comments createdAt')   //selecting only id content user and comments from posts
+        .select('content user comments createdAt likes')   //selecting only id content user and comments from posts
         .sort('-createdAt')
         .populate('user','email name avatar') //from user select only id email and name id
         .populate({path:'comments',populate:{path:'user',select:'name email avatar'}}); //from user in array of comments select name email avatar id 

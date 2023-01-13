@@ -1,0 +1,10 @@
+[0mGET / [36m302[0m 12.690 ms - 72[0m
+[0mGET /users/sign-in [32m200[0m 53.039 ms - 3235[0m
+[0mGET /users/auth/github [36m302[0m 8.454 ms - 0[0m
+[0mGET /users/auth/github/callback?code=015e28265968aa1ba74f [36m302[0m 7159.405 ms - 46[0m
+[0mGET / [32m200[0m 232.810 ms - 27765[0m
+[0mGET /favicon.ico [33m404[0m 19.513 ms - 150[0m
+[0mGET /users/profile/637dd0ebf5bfdbea85adb255 [36m304[0m 14.797 ms - -[0m
+[0mGET / [32m200[0m 48.371 ms - 27436[0m
+[0mPOST /posts/new-post [32m200[0m 57.710 ms - 568[0m
+[0mGET / [32m200[0m 158.823 ms - 28631[0m

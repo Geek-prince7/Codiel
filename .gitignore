@@ -1,3 +1,4 @@
 node_modules/
 uploads/users/
 /app_pwd.js
+config/environment.js

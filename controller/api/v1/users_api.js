@@ -1,5 +1,6 @@
 const user_collection=require('../../../models/user')
 const jwt=require('jsonwebtoken');
+const env=require('../../../config/environment')
 
 module.exports.createSession=async(req,resp)=>{
     try{
@@ -16,7 +17,7 @@ module.exports.createSession=async(req,resp)=>{
         return resp.json(200,{
             message:"sign in successful .keep your token",
             data:{
-                token:jwt.sign(user.toJSON(),'codiel')
+                token:jwt.sign(user.toJSON(),env.passport_jwt_secret_key,{expiresIn:1000*1000})
             }
 
         })
