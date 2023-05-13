@@ -1,4 +1,5 @@
 # Codiel
+Codiel is a social media web application that offers a range of functionalities for users. It is built using modern web technologies and implements JSON Web Token (JWT) authentication for secure user authentication. Codiel enables users to make friends, chat with them in real-time using Socket.io, and write posts. It also allows users to comment on their friends' posts and get notifications for likes/comments. Codiel features a mailer for new posts and comments and prioritizes tasks using Kue.js. Moreover, it implements logging functionality to keep track of user actions. Overall, Codiel is a comprehensive social media app that offers a rich user experience.
 <ul>
 <li>Social media project</li>
 <li>using -> node js,Express js</li>
